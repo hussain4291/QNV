@@ -83,7 +83,7 @@ function tone(f, start, dur, type = "sine", vol = .15, f2){
 }
 // sound clips: NANI! when someone is robbed, a paint splat when someone is slimed
 const CLIPS = {};
-function clip(name){ try { let a = CLIPS[name]; if (!a) { a = CLIPS[name] = new Audio("../blue/" + name + ".mp3"); a.preload = "auto"; } a.currentTime = 0; a.volume = 1; a.play().catch(() => {}); } catch (e) {} }
+function clip(name){ try { let a = CLIPS[name]; if (!a) { a = CLIPS[name] = new Audio("" + name + ".mp3"); a.preload = "auto"; } a.currentTime = 0; a.volume = 1; a.play().catch(() => {}); } catch (e) {} }
 const SFX = {
   click(){ tone(700, 0, .05, "triangle", .1); }, tick(){ tone(1400, 0, .03, "square", .05); },
   correct(){ [660, 880, 1320].forEach((f, i) => tone(f, i * .09, .2, "sine", .16)); }, wrong(){ tone(220, 0, .3, "sawtooth", .1, 140); },
@@ -161,7 +161,7 @@ async function tryCode(c){
   { const here = (location.pathname.match(/\/([^\/]+)\/[^\/]*$/) || [])[1], want = info.folder || ({"8": "y8", "10": "y10", "11": "y11", "12": "y12", "13": "y13", "GK": "gk"})[info.year];
     const siteRoot = location.href.split(/[?#]/)[0].replace(/\/[^\/]+\/[^\/]*$/, "");
     if (info.origin && info.origin !== siteRoot && info.origin !== location.origin && !NET.LOCAL) { location.replace(`${info.origin}/${want}/blue-play.html?c=${c}`); return; }   // a code from the other game site
-    if (want && here && want !== here) { location.replace(`../${want}/blue-play.html?c=${c}${NET.LOCAL ? "&local=1" : ""}`); return; } }
+  }   // single-folder site: no year folders to switch between
   msg = "";
   history.replaceState(null, "", "?c=" + c + (NET.LOCAL ? "&local=1" : ""));
   subs.push(db.on(G("players"), v => { players = {}; Object.keys(v || {}).forEach(k => { if (v[k] && v[k].name) players[k] = v[k]; }); onPlayers(); }));
@@ -806,14 +806,14 @@ function watchDuel(id, from, quiet){
 function loadNuke(){
   if (window.BPNUKE) return Promise.resolve();
   if (loadNuke.p) return loadNuke.p;
-  loadNuke.p = new Promise((res, rej) => { const s = document.createElement("script"); s.src = "../blue/nuke.js"; s.onload = res; s.onerror = e => { loadNuke.p = null; rej(e); }; document.head.appendChild(s); });
+  loadNuke.p = new Promise((res, rej) => { const s = document.createElement("script"); s.src = "nuke.js"; s.onload = res; s.onerror = e => { loadNuke.p = null; rej(e); }; document.head.appendChild(s); });
   return loadNuke.p;
 }
 let preloaded = false;
 function preloadEvents(){   // fetch the big-event files quietly, so they appear instantly when needed
   if (preloaded) return; preloaded = true;
   loadNuke().catch(() => {});
-  try { new Image().src = "../blue/nuke-splash.jpg"; const a = new Audio(); a.preload = "auto"; a.src = "../blue/siren.mp3"; } catch (e) {}
+  try { new Image().src = "nuke-splash.jpg"; const a = new Audio(); a.preload = "auto"; a.src = "siren.mp3"; } catch (e) {}
 }
 // the same blast logic runs on the board (normally) and on the launcher's device (backup); only one can claim it
 async function applyBlast(b){
@@ -900,7 +900,7 @@ function miniGameChoice(){
 }
 function loadMG(){
   if (window.BPMG) return Promise.resolve();
-  return new Promise((res, rej) => { const s = document.createElement("script"); s.src = "../blue/minigames.js"; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
+  return new Promise((res, rej) => { const s = document.createElement("script"); s.src = "minigames.js"; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
 }
 function closeMG(){ const k = document.getElementById("kg"); if (k) k.remove(); inMG = false; }
 async function playMG(key){

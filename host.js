@@ -21,10 +21,10 @@ const ranked = () => Object.keys(players).sort((a, b) => (players[b].score || 0)
 
 /* ---------- sound: music on the board only ---------- */
 let AC = null, musicOn = load("bp-music", "1") === "1", bgIdx = 0, bg = null;
-const TRACKS = ["../blue/music3.mp3"];   // one track, looped forever
+const TRACKS = ["music3.mp3"];   // one track, looped forever
 // sound clips: NANI! when someone is robbed, a paint splat when someone is slimed
 const CLIPS = {};
-function clip(name){ try { let a = CLIPS[name]; if (!a) { a = CLIPS[name] = new Audio("../blue/" + name + ".mp3"); a.preload = "auto"; } a.currentTime = 0; a.volume = 1; a.play().catch(() => {}); } catch (e) {} }
+function clip(name){ try { let a = CLIPS[name]; if (!a) { a = CLIPS[name] = new Audio("" + name + ".mp3"); a.preload = "auto"; } a.currentTime = 0; a.volume = 1; a.play().catch(() => {}); } catch (e) {} }
 
 function ac(){ if (!AC) { try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {} } if (AC && AC.state !== "running") { try { AC.resume(); } catch (e) {} } return AC; }
 function tone(f, start, dur, type = "sine", vol = .2, f2){
@@ -269,7 +269,7 @@ let nukeTally = null, nukeBusy = false, blastQ = [];
 function loadNuke(){
   if (window.BPNUKE) return Promise.resolve();
   if (loadNuke.p) return loadNuke.p;
-  loadNuke.p = new Promise((res, rej) => { const s = document.createElement("script"); s.src = "../blue/nuke.js"; s.onload = res; s.onerror = e => { loadNuke.p = null; rej(e); }; document.head.appendChild(s); });
+  loadNuke.p = new Promise((res, rej) => { const s = document.createElement("script"); s.src = "nuke.js"; s.onload = res; s.onerror = e => { loadNuke.p = null; rej(e); }; document.head.appendChild(s); });
   return loadNuke.p;
 }
 const NUKE_PCT = .5, DELAY = {nuke: 5000, ext: 8400};

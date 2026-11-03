@@ -5,7 +5,7 @@
 const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
-const BASE = (document.currentScript && document.currentScript.src) ? document.currentScript.src.replace(/nuke\.js.*$/, "") : "../blue/";
+const BASE = (document.currentScript && document.currentScript.src) ? document.currentScript.src.replace(/nuke\.js.*$/, "") : "";
 
 /* ---------- sound ---------- */
 let AC = null;
