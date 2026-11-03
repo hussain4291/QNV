@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>QNV Quest</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="blue/blue.css">
+<style>
+body{padding:clamp(20px,5vw,60px) 16px 40px; text-align:center}
+.logo{font-size:clamp(3rem,10vw,6.5rem)}
+.sub{color:var(--muted); margin:22px auto 34px; font-size:1.15rem; max-width:700px}
+.years{display:grid; gap:20px; max-width:520px; margin:0 auto; grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.yr{display:block; text-decoration:none; color:var(--ink); background:var(--panel); border-radius:24px; padding:24px 18px; border-top:10px solid var(--c); box-shadow:0 8px 0 rgba(0,0,0,.35); transition:transform .15s}
+.yr:hover,.yr:focus-visible{transform:translateY(-5px)}
+.yr b{display:inline-block; font-family:"Bungee","Arial Black",sans-serif; font-weight:400; font-size:2.4rem; background:var(--c); color:#3B0816; border-radius:14px; padding:2px 18px}
+.yr span{display:block; color:var(--muted); margin-top:12px}
+.note{color:var(--muted); margin-top:40px}
+</style>
+</head>
+<body>
+<h1 class="logo">QNV<br>QUEST</h1>
+<p class="sub">🇶🇦 Qatar National Vision. Teacher: open the game on the board. Everyone plays alone with a live leaderboard. Students join with the QR code.</p>
+<div class="years">
+  <a class="yr" href="y8/" style="--c:#3FE0D0"><b>Y8 QNV</b><span>Resources · energy · oceans · recycling · our planet</span></a>
+</div>
+<p class="note">Students: you don't need this page. Scan the QR code on the board to join.</p>
+<script>if (/[?&]local=1/.test(location.search)) document.querySelectorAll("a.yr").forEach(a => a.href += "?local=1");</script>
+<script src="y8/net.js"></script>
+<script src="blue/gate.js"></script>
+</body>
+</html>
